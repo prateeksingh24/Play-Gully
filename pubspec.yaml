@@ -47,6 +47,7 @@ dependencies:
 
   url_launcher: ^6.3.0
   confetti: ^0.7.0
+  share_plus: ^10.0.2
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +92,8 @@ flutter:
   fonts:
    - family: Cabin
      fonts:
+       - asset: fonts/Cabin-Regular.ttf
+       - asset: fonts/Cabin-Medium.ttf
        - asset: fonts/Cabin-Bold.ttf
          weight: 900
          

@@ -25,7 +25,7 @@ class _WalletScreenState extends State<WalletScreen> {
               width: width,
               height: 280,
               decoration: BoxDecoration(
-                  color: AppColor.kSecondary,
+                  color: AppColor.kSecondary.withAlpha(160),
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20))),

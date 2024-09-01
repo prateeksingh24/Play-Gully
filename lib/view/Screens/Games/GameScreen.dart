@@ -3,6 +3,9 @@ import 'package:cash_point/Data/GameList.dart';
 import 'package:cash_point/Model/gamesModel.dart';
 import 'package:cash_point/Widget/AppBarWidget.dart';
 import 'package:cash_point/Widget/GamesCard.dart';
+import 'package:cash_point/view/Screens/Games/SpinWinScreen.dart';
+import 'package:cash_point/view/Screens/LeaderBoardScreen.dart';
+import 'package:cash_point/view/Screens/walletScreen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -16,14 +19,65 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
- 
-
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: const AppBarWidget(title: "CASHPOINT"),
+      appBar: AppBar(
+        backgroundColor: AppColor.kSecondary.withAlpha(150),
+        title: Text("CASHPOINT"),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LeaderboardScreen()));
+            },
+            child: Image.asset(
+              "assets/Icons/podium.png",
+              width: 30,
+              height: 30,
+            ),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WalletScreen()));
+              },
+              child: Container(
+                width: 70,
+                height: 35,
+                decoration: BoxDecoration(
+                  color: AppColor.kMain,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      "0",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    Image.asset(
+                      "assets/Icons/star.png",
+                      width: 20,
+                      height: 20,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: AppColor.kMain,
       body: SingleChildScrollView(
         child: Column(
