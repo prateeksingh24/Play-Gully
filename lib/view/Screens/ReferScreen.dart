@@ -1,4 +1,5 @@
 import 'package:cash_point/AppColor.dart';
+import 'package:cash_point/constant.dart';
 import 'package:cash_point/view/Screens/MyReferrals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,7 @@ class ReferScreen extends StatefulWidget {
 }
 
 class _ReferScreenState extends State<ReferScreen> {
-  final String referralCode = "C7FJKI67";
+
   bool iscopied = false;
 
   Future<void> _openWhatsApp() async {
@@ -34,15 +35,15 @@ class _ReferScreenState extends State<ReferScreen> {
   }
 
   // Function to open Share dialog
-  Future<void> _shareContent() async {
-    final Uri _url =
-        Uri.parse('https://www.pub.dev'); // Example URL or content to share
-    if (await canLaunchUrl(_url)) {
-      await launchUrl(_url);
-    } else {
-      throw 'Could not launch $_url';
-    }
-  }
+  // Future<void> _shareContent() async {
+  //   final Uri _url =
+  //       Uri.parse('https://www.pub.dev'); // Example URL or content to share
+  //   if (await canLaunchUrl(_url)) {
+  //     await launchUrl(_url);
+  //   } else {
+  //     throw 'Could not launch $_url';
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +79,7 @@ class _ReferScreenState extends State<ReferScreen> {
                     width: 220,
                     height: 220,
                   ),
-                  Text(
+                  const Text(
                     "Earn Upto 10% Commison",
                     style: TextStyle(
                       fontSize: 20,
@@ -100,7 +101,7 @@ class _ReferScreenState extends State<ReferScreen> {
                         onLongPress: () {
                           // Copy the text to the clipboard
                           Clipboard.setData(
-                            ClipboardData(text: referralCode),
+                            const ClipboardData(text: referralCode),
                             // Show a snackbar or toast to inform the user
                             // ScaffoldMessenger.of(context).showSnackBar(
                             //   SnackBar(
@@ -118,9 +119,9 @@ class _ReferScreenState extends State<ReferScreen> {
                             iscopied = !iscopied;
                           });
                         },
-                        child: Text(
+                        child: const Text(
                           referralCode,
-                          style: const TextStyle(
+                          style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               fontFamily: "Cabin"),
@@ -149,7 +150,7 @@ class _ReferScreenState extends State<ReferScreen> {
                           height: 50,
                           width: 150,
                           decoration: BoxDecoration(
-                              border: GradientBoxBorder(
+                              border: const GradientBoxBorder(
                                 gradient: LinearGradient(
                                   colors: [
                                     Color.fromARGB(255, 107, 3, 212),
@@ -199,7 +200,7 @@ class _ReferScreenState extends State<ReferScreen> {
                           width: 150,
                           decoration: BoxDecoration(
                               color: AppColor.kMain,
-                              border: GradientBoxBorder(
+                              border: const GradientBoxBorder(
                                 gradient: LinearGradient(
                                   colors: [
                                     Color.fromARGB(255, 107, 3, 212),
@@ -293,7 +294,7 @@ class _ReferScreenState extends State<ReferScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   InkWell(
                     onTap: () {
@@ -324,6 +325,9 @@ class _ReferScreenState extends State<ReferScreen> {
                         ),
                       ),
                     ),
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                 ],
               ),

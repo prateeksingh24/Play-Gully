@@ -4,7 +4,7 @@ import 'package:cash_point/Model/gamesModel.dart';
 import 'package:cash_point/Widget/AppBarWidget.dart';
 import 'package:cash_point/Widget/GamesCard.dart';
 import 'package:cash_point/view/Screens/Games/SpinWinScreen.dart';
-import 'package:cash_point/view/Screens/LeaderBoardScreen.dart';
+import 'package:cash_point/view/Screens/Games/LeaderBoardScreen.dart';
 import 'package:cash_point/view/Screens/walletScreen.dart';
 
 import 'package:flutter/material.dart';
@@ -26,12 +26,14 @@ class _GameScreenState extends State<GameScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.kSecondary.withAlpha(150),
-        title: Text("CASHPOINT"),
+        title: const Text("CASHPOINT"),
         actions: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LeaderboardScreen()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LeaderboardScreen()));
             },
             child: Image.asset(
               "assets/Icons/podium.png",
@@ -39,7 +41,7 @@ class _GameScreenState extends State<GameScreen> {
               height: 30,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Padding(

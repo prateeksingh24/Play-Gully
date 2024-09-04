@@ -4,6 +4,7 @@ import 'package:cash_point/Widget/spinwheel.dart';
 import 'package:cash_point/view/Screens/Games/GameScreen.dart';
 import 'package:cash_point/view/Screens/Games/SpinWinScreen.dart';
 import 'package:cash_point/view/Screens/HomeScreen.dart';
+import 'package:cash_point/view/Screens/ProfileScreen.dart';
 
 import 'package:cash_point/view/Screens/ReferScreen.dart';
 import 'package:cash_point/view/Screens/WalletScreen.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     Icons.games, // Leaderboard screen icon
     Icons.share, // History screen icon
 
-    Icons.wallet, // Profile screen icon
+    Icons.person, // Profile screen icon
   ];
 
   // List of screens corresponding to each icon index
@@ -34,13 +35,13 @@ class _HomePageState extends State<HomePage> {
     const GameScreen(),
     const ReferScreen(), // History screen
     // Leaderboard screen
-    const WalletScreen(), // Profile screen
+    const ProfileScreen(), // Profile screen
   ];
   final List<String> names = [
     "Home",
     "ALl Games",
     "Refer Earn",
-    "Wallet",
+    "Profile",
   ];
 
   @override

@@ -1,3 +1,4 @@
+import 'package:cash_point/AppColor.dart';
 import 'package:cash_point/Model/leaderboardModel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,9 +14,11 @@ class Leaderboardcard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 8, right: 8, bottom: 7, top: 5),
       child: Container(
         width: width,
-        height: 60,
+        height: 70,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
+            gradient: AppColor.kGradient,
+            border: kBorder,
+            borderRadius: BorderRadius.circular(10)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -32,7 +35,6 @@ class Leaderboardcard extends StatelessWidget {
                 ),
                 Text(
                   leaderbord.name,
-                  style: const TextStyle(color: Colors.black),
                 ),
               ],
             ),
@@ -41,11 +43,14 @@ class Leaderboardcard extends StatelessWidget {
             ),
             Text(
               "#${leaderbord.rank}",
-              style: const TextStyle(color: Colors.black),
             ),
             Row(
               children: [
-                FaIcon(FontAwesomeIcons.moneyBill, color: Colors.green),
+                Image.asset(
+                  "assets/Icons/star.png",
+                  width: 30,
+                  height: 30,
+                ),
                 const SizedBox(
                   width: 4,
                 ),

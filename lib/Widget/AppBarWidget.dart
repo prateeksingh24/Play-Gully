@@ -12,12 +12,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: AppColor.kSecondary.withAlpha(150),
+      automaticallyImplyLeading: false,
       title: Text(title),
       actions: [
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Spinwinscreen()));
+                MaterialPageRoute(builder: (context) => const Spinwinscreen()));
           },
           child: Image.asset(
             "assets/Icons/fortune-wheel.png",
@@ -25,7 +26,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             height: 30,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Padding(

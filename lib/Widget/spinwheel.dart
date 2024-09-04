@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:cash_point/AppColor.dart';
 import 'package:cash_point/Widget/Buttons/CustomizeButton1.dart';
 import 'package:cash_point/Widget/winnigCeleb.dart';
@@ -34,15 +35,18 @@ class _SpinwheelState extends State<Spinwheel> {
   @override
   void dispose() {
     super.dispose();
+    _audioPlayer.dispose();
     controller.close();
   }
+
+  final AudioPlayer _audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Container(
@@ -50,23 +54,23 @@ class _SpinwheelState extends State<Spinwheel> {
           width: 150,
           decoration: BoxDecoration(
               gradient: AppColor.kGradient,
-              border: GradientBoxBorder(
+              border: const GradientBoxBorder(
                 gradient: LinearGradient(
                   colors: [Color(0xfffbaf0c), Color(0xfffbaf0c)],
                 ),
                 width: 2,
               ),
               borderRadius: BorderRadius.circular(5)),
-          child:  Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Available Spin",
                 style: TextStyle(fontSize: 20),
               ),
               Text(
-                "${count}",
-                style: TextStyle(color: Colors.amber, fontSize: 18),
+                "$count",
+                style: const TextStyle(color: Colors.amber, fontSize: 18),
               )
             ],
           ),
@@ -89,38 +93,6 @@ class _SpinwheelState extends State<Spinwheel> {
               ),
             ],
             items: [
-              // FortuneItem(
-              //   child: RotatedBox(
-              //     quarterTurns: 1,
-              //     child: Padding(
-              //         padding: const EdgeInsets.only(bottom: 50),
-              //         child: Image.asset(
-              //           "assets/Icons/remove.png",
-              //           width: 55,
-              //         )),
-              //   ),
-              //   style: FortuneItemStyle(color: AppColor.kMain),
-              // ),
-              // FortuneItem(
-              //   child: RotatedBox(
-              //     quarterTurns: 1,
-              //     child: Padding(
-              //         padding: const EdgeInsets.only(bottom: 20, top: 20),
-              //         child: Column(
-              //           children: [
-              //             Image.asset(
-              //               "assets/Icons/star.png",
-              //               width: 55,
-              //             ),
-              //             const Text(
-              //               "0",
-              //               style: TextStyle(fontSize: 25, fontFamily: "Esportive"),
-              //             ),
-              //           ],
-              //         )),
-              //   ),
-              //   style: FortuneItemStyle(color: Colors.blue.shade800.withAlpha(50)),
-              // ),
               ..._losing90(imagePath: item, color: Colors.white.withAlpha(150)),
             ],
             // onFling: () {
@@ -131,20 +103,25 @@ class _SpinwheelState extends State<Spinwheel> {
 
             //   controller.add(outcome ?? 0);
             // },
-            onAnimationEnd: () {
+            onAnimationEnd: ()  {
+               _audioPlayer
+                  .stop(); // Stop the spinning sound before doing anything else
+
               print("OUTCOME: $outcome");
-              //Logic here when win
+
+             
               if (outcome!.isOdd) {
+                 _audioPlayer.play(
+                    AssetSource('audio/winning.mp3')); // Play the winning sound
+
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: AppColor.kSecondary,
-                    // title: const Text('AlertDialog Title'),
-                    // content: const Text('AlertDialog description'),
                     actions: <Widget>[
                       if (outcome != null && outcome! > 0)
                         Image.asset(item[outcome!]),
-                      Winnigceleb(),
+                      const Winnigceleb(),
                       TextButton(
                         onPressed: () => Navigator.pop(context, 'Cancel'),
                         child: const Text('Cancel'),
@@ -156,13 +133,13 @@ class _SpinwheelState extends State<Spinwheel> {
                     ],
                   ),
                 );
+                 _audioPlayer
+                    .stop(); // Stop the winning sound after the dialog is shown
               } else {
                 showDialog<String>(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     backgroundColor: AppColor.kSecondary,
-                    // title: const Text('AlertDialog Title'),
-                    // content: const Text('AlertDialog description'),
                     actions: <Widget>[
                       if (outcome != null && outcome! > 0)
                         Image.asset(item[outcome!]),
@@ -186,8 +163,9 @@ class _SpinwheelState extends State<Spinwheel> {
           width: 100,
           child: Customizebutton1(
               text: "SPIN",
-              onTap: () {
+              onTap: () async {
                 if (count > 0) {
+                  await _audioPlayer.play(AssetSource('audio/spinning.mp3'));
                   setState(
                     () {
                       int listLength = item.length;
@@ -196,11 +174,9 @@ class _SpinwheelState extends State<Spinwheel> {
                       outcome = outcomes[Random().nextInt(outcomes.length)];
 
                       controller.add(outcome ?? 0);
-                    count--;
+                      count--;
                     },
-                     
                   );
-                 
                 }
               }),
         )

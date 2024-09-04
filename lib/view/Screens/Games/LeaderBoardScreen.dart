@@ -2,6 +2,8 @@ import 'package:cash_point/AppColor.dart';
 import 'package:cash_point/Model/leaderboardModel.dart';
 import 'package:cash_point/Widget/leaderboardCard.dart';
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -63,9 +65,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.only(left: 20, right: 10),
+            padding: const EdgeInsets.only(left: 20, right: 10),
             width: width,
-            height: 450,
+            height: 470,
             decoration: BoxDecoration(
               gradient: AppColor.kGradient,
               boxShadow: [
@@ -75,7 +77,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                   spreadRadius: 5,
                 ),
               ],
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 bottomLeft: Radius.circular(30),
                 bottomRight: Radius.circular(30),
               ),
@@ -83,19 +85,23 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(
+                Padding(
+                  padding: const EdgeInsets.only(
                     top: 40,
-                    left: 10,
                   ),
                   child: Row(
                     children: [
-                      Icon(
-                        Icons.arrow_circle_left_outlined,
-                        size: 30,
+                      IconButton(
+                        onPressed: () {
+                          Get.back();
+                        },
+                        icon: const Icon(
+                          Icons.arrow_circle_left_outlined,
+                          size: 30,
+                        ),
                       ),
-                      SizedBox(width: 20),
-                      Text(
+                      const SizedBox(width: 20),
+                      const Text(
                         "LeaderBoard",
                         style: TextStyle(fontSize: 30),
                       ),
@@ -125,7 +131,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemCount: restOfTheRanks.length,
@@ -145,6 +151,7 @@ class LeaderboardCard2 extends StatelessWidget {
   final Color rankColor;
 
   const LeaderboardCard2({
+    super.key,
     required this.leaderboard,
     required this.rankColor,
   });
@@ -153,6 +160,12 @@ class LeaderboardCard2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        if (leaderboard.rank == 1)
+          Image.asset(
+            "assets/Icons/king.png",
+            width: 40,
+            height: 40,
+          ),
         CircleAvatar(
           radius: leaderboard.rank == 1 ? 70 : 60,
           backgroundColor: Colors.transparent,
@@ -160,8 +173,8 @@ class LeaderboardCard2 extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Image.network(
               leaderboard.imageUrl,
-              width: leaderboard.rank == 1 ? 130 : 110,
-              height: leaderboard.rank == 1 ? 130 : 110,
+              width: leaderboard.rank == 1 ? 120 : 110,
+              height: leaderboard.rank == 1 ? 120 : 110,
               fit: BoxFit.cover,
             ),
           ),
@@ -169,7 +182,7 @@ class LeaderboardCard2 extends StatelessWidget {
         const SizedBox(height: 10),
         Container(
           height:
-              leaderboard.rank == 1 ? 200 : (leaderboard.rank == 2 ? 150 : 130),
+              leaderboard.rank == 1 ? 180 : (leaderboard.rank == 2 ? 150 : 135),
           decoration: BoxDecoration(
             color: AppColor.kSecondary,
             border: Border(
@@ -192,7 +205,7 @@ class LeaderboardCard2 extends StatelessWidget {
                 children: [
                   Text(
                     leaderboard.price.toString(),
-                    style: TextStyle(fontSize: 17),
+                    style: const TextStyle(fontSize: 17),
                   ),
                   Image.asset(
                     "assets/Icons/star.png",
@@ -220,7 +233,7 @@ class LeaderboardCard2 extends StatelessWidget {
                 child: Center(
                   child: Text(
                     leaderboard.rank.toString(),
-                    style: TextStyle(fontSize: 35),
+                    style: const TextStyle(fontSize: 35),
                   ),
                 ),
               )
